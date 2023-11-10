@@ -44,10 +44,20 @@ public class PlayerController : MonoBehaviour
 
     public void Salto()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && TocandoSuelo())
-        {
-            fisica.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
-            //Se le añade a la figura fuerza para saltar (10) al pulsar espacio
+        //Si se le da a salto
+        if (Input.GetKeyDown(KeyCode.Space) ){
+            //Si toca suelo salta automáticamente
+            if (TocandoSuelo())
+            {
+                fisica.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+            }
+            //Si no toca suelo debe ser una plataforma y solo salta si está quieto
+            else
+            { 
+                if ((Mathf.Abs(fisica.velocity.y) < 0.5f))
+                fisica.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+
+            }
         }
     }
 
