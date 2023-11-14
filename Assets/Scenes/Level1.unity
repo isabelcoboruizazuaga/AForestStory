@@ -12356,7 +12356,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -14310,6 +14310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidad: 0
   fuerzaSalto: 0
+  vidas: 0
+  vulnerable: 0
 --- !u!50 &988253131
 Rigidbody2D:
   serializedVersion: 4
@@ -32654,6 +32656,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 908965908932103314, guid: be5d59d866c987943ab2699f71106408, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227880173227261183, guid: be5d59d866c987943ab2699f71106408, type: 3}
+      propertyPath: enemigo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050066229934500803, guid: be5d59d866c987943ab2699f71106408, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

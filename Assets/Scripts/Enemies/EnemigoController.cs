@@ -22,13 +22,15 @@ public class EnemigoController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Se obtiene la posición inicial y se calcula la final
         posicionInicial = transform.position;
         posicionFin = new Vector3(posicionInicial.x + finX, posicionInicial.y + finY, posicionInicial.z);
         moviendoAFin = true;
 
-
+        //Inicializamos los componentes
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        enemigo = gameObject;
     }
 
     // Update is called once per frame
@@ -56,8 +58,6 @@ public class EnemigoController : MonoBehaviour
                 sprite.flipX = !flip;
         }
 
-        //Vector3 posicionDestino = (moviendoAFin) ? posicionFin : posicionInicial;
-        //si moviendo a fin es true va a posicionfin y si no a posicion inicial
 
         transform.position = Vector3.MoveTowards(transform.position, posicionDestino, velocidad * Time.deltaTime);
         //mueve desde la posicion en la que estemos ahota a la posicion que se le indica a esa velocidad
@@ -79,6 +79,44 @@ public class EnemigoController : MonoBehaviour
         {
             sprite.flipX = true;
         }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable)
+        {
+            collision.gameObject.GetComponent<PlayerController>().SetVulnerable(false);
+
+            //vidas-- <=1 -> prrimero compara y luego resta (por ejemplo 2<1, vidas=1)
+            //si es --vidas seria al reves, primero resta y despues compara
+            if (collision.gameObject.GetComponent<PlayerController>().vidas-- <= 1)
+            {
+               /* sonido.Play();
+                StartCoroutine(FinJuego(collision));*/
+
+
+            }
+            else
+            {
+                Debug.Log("choque");
+                StartCoroutine(QuitaVida(collision));
+                //Invoke("funcion", 2); llama a la funcion "funcion" en 2 segundos, no admite parámetros, es de unity
+            }
+
+            //hud.SetVidasTxt(collision.gameObject.GetComponent<PlayerController>().vidas);
+
+        }
+    }
+
+    IEnumerator QuitaVida(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+
+
+        yield return new WaitForSeconds(3f);
+        Debug.Log(collision.gameObject.GetComponent<PlayerController>().vidas);
+        collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //blanco lo deja con el color normal
     }
 
 }

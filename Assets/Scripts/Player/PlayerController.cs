@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     float entradaX = 0f;
 
+    public int vidas;
+    public bool vulnerable;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,10 @@ public class PlayerController : MonoBehaviour
 
         fisica = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+
+        //Vidas
+        vidas = 3;
+        vulnerable = true;
     }
 
     // Update is called once per frame
@@ -80,5 +87,11 @@ public class PlayerController : MonoBehaviour
         //se lanza el rayo desde mas abajo del centro (-2f) de nuestro objeto unos 20 cm (0.2f), va hacia abajo por el down
 
         return toca.collider != null;
+    }
+
+
+    public void SetVulnerable(bool valor)
+    {
+        vulnerable = valor;
     }
 }
