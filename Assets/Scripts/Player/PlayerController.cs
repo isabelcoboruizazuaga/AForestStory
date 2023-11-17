@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     //Movimiento
     public int velocidad;
     public int fuerzaSalto;
-    private Rigidbody2D fisica;
-    private SpriteRenderer sprite;
+    public Rigidbody2D fisica;
+    public SpriteRenderer sprite;
     float entradaX = 0f;
 
     public int vidas;
@@ -89,9 +90,13 @@ public class PlayerController : MonoBehaviour
         return toca.collider != null;
     }
 
-
-    public void SetVulnerable(bool valor)
+    public void FinJuego()
     {
-        vulnerable = valor;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //El scene manager carga la escena activa, para esto necesita el número de índice de la escena
+
+        //SceneManager.LoadScene("Menu");
     }
+
+
 }

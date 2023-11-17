@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
+using System;
+using Unity.VisualScripting;
+
 
 public class EnemigoController : MonoBehaviour
 {
+    private PlayerController playerController;
+    private GameObject player;
 
     public GameObject enemigo;
     public float velocidad;
@@ -82,7 +86,62 @@ public class EnemigoController : MonoBehaviour
     }
 
 
+   
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable)
+        {
+            player = collision.gameObject;
+            this.playerController =player.GetComponent<PlayerController>();
+
+            this.playerController.vulnerable = false;
+
+            //vidas-- <=1 -> prrimero compara y luego resta (por ejemplo 2<1, vidas=1)
+            //si es --vidas seria al reves, primero resta y despues compara
+            if (this.playerController.vidas-- <= 1)
+            {
+                //sonido.Play();
+                StartCoroutine(FinJuego(collision));
+
+
+            }
+            else
+            {
+                StartCoroutine(QuitaVida(collision));
+            }
+
+            //hud.SetVidasTxt(collision.gameObject.GetComponent<PlayerController>().vidas);
+
+        }
+    }
+    IEnumerator QuitaVida(Collision2D collision)
+    {
+       player.GetComponent<SpriteRenderer>().color = Color.red;
+
+        yield return new WaitForSeconds(3f);
+        this.playerController.vulnerable = true;
+        player.GetComponent<SpriteRenderer>().color = Color.white; //blanco lo deja con el color normal
+    }
+
+    IEnumerator FinJuego(Collision2D collision)
+    {
+        Camera.main.transform.parent = null; //dejamos a la cámara huérfana
+       player.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90)); //se desmaya el player
+        //collision.gameObject.GetComponent<PlayerController>().muerto = true;
+
+        player.GetComponent<SpriteRenderer>().color = Color.red;
+
+        yield return new WaitForSeconds(1f);
+        this.playerController.FinJuego();
+       // collision.gameObject.GetComponent<PlayerController>().Perder();
+
+        //coge el game object con el que chocamos y obtiene el script de ese objeto
+        //y ejecuta el método que tiene dentro
+    }
+
+
+    /* private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable)
         {
@@ -92,31 +151,21 @@ public class EnemigoController : MonoBehaviour
             //si es --vidas seria al reves, primero resta y despues compara
             if (collision.gameObject.GetComponent<PlayerController>().vidas-- <= 1)
             {
-               /* sonido.Play();
-                StartCoroutine(FinJuego(collision));*/
+               // sonido.Play();
+                //StartCoroutine(FinJuego(collision));
 
 
-            }
+}
             else
-            {
-                Debug.Log("choque");
-                StartCoroutine(QuitaVida(collision));
-                //Invoke("funcion", 2); llama a la funcion "funcion" en 2 segundos, no admite parámetros, es de unity
-            }
+{
+    Debug.Log("choque");
+    StartCoroutine(QuitaVida(collision));
+    //Invoke("funcion", 2); llama a la funcion "funcion" en 2 segundos, no admite parámetros, es de unity
+}
 
             //hud.SetVidasTxt(collision.gameObject.GetComponent<PlayerController>().vidas);
 
         }
     }
-
-    IEnumerator QuitaVida(Collision2D collision)
-    {
-        collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-
-
-        yield return new WaitForSeconds(3f);
-        Debug.Log(collision.gameObject.GetComponent<PlayerController>().vidas);
-        collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //blanco lo deja con el color normal
-    }
-
+*/
 }
