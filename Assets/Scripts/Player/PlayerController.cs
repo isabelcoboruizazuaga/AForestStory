@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer sprite;
     float entradaX = 0f;
 
+    public int estrellas;
     public int vidas;
     public bool vulnerable;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         //Vidas
         vidas = 3;
         vulnerable = true;
+        estrellas = 0;
     }
 
     // Update is called once per frame
