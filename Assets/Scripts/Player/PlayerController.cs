@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public Rigidbody2D fisica;
+    public SpriteRenderer sprite;
+    private Animator anim;
+
     //Movimiento
     public int velocidad;
     public int fuerzaSalto;
-    public Rigidbody2D fisica;
-    public SpriteRenderer sprite;
     float entradaX = 0f;
 
     public int estrellas;
     public int vidas;
     public bool vulnerable;
-
+    public bool muerto;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +31,12 @@ public class PlayerController : MonoBehaviour
 
         //Vidas
         vidas = 3;
-        vulnerable = true;
         estrellas = 0;
+        vulnerable = true;
+        muerto = false;
+
+        //Animaciones
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,6 +44,11 @@ public class PlayerController : MonoBehaviour
     {
         //Obtención de input de mover hacia los lados
         entradaX = Input.GetAxis("Horizontal");
+
+        //Control de animación
+        anim.SetFloat("velocidadX", Mathf.Abs(fisica.velocity.x));
+        anim.SetFloat("velocidadY", fisica.velocity.y);
+        anim.SetBool("dead", muerto); //TO DO: CAMBIAR ESTO A UN MÉTODO PARA QUE NO SE ACTUALICE TODO EL RATO
 
         //Mecánica de salto
         Salto();

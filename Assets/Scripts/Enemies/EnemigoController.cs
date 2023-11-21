@@ -7,8 +7,8 @@ using Unity.VisualScripting;
 
 public class EnemigoController : MonoBehaviour
 {
-    private PlayerController playerController;
-    private GameObject player;
+    protected PlayerController playerController;
+    protected GameObject player;
 
     public GameObject enemigo;
     public float velocidad;
@@ -16,8 +16,8 @@ public class EnemigoController : MonoBehaviour
     public Vector3 posicionInicial;
     private bool moviendoAFin;
 
-    private Rigidbody2D rb;
-    private SpriteRenderer sprite;
+    protected Rigidbody2D rb;
+    protected SpriteRenderer sprite;
     public bool flip = true; //Marca si hay giro o no basándose en la posición inicial del sprite en unity
     public bool staticFlip=false;
 
@@ -115,7 +115,7 @@ public class EnemigoController : MonoBehaviour
 
         }
     }
-    IEnumerator QuitaVida(Collision2D collision)
+    protected IEnumerator QuitaVida(Collision2D collision)
     {
        player.GetComponent<SpriteRenderer>().color = Color.red;
 
@@ -124,21 +124,21 @@ public class EnemigoController : MonoBehaviour
         player.GetComponent<SpriteRenderer>().color = Color.white; //blanco lo deja con el color normal
     }
 
-    IEnumerator FinJuego(Collision2D collision)
+    protected IEnumerator FinJuego(Collision2D collision)
     {
         Camera.main.transform.parent = null; //dejamos a la cámara huérfana
-       player.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90)); //se desmaya el player
-        //collision.gameObject.GetComponent<PlayerController>().muerto = true;
 
+        //Seteamos la muerte
+        collision.gameObject.GetComponent<PlayerController>().muerto = true;
         player.GetComponent<SpriteRenderer>().color = Color.red;
+        player.GetComponent<Collider2D>().enabled = false; //Para que atraviese el escenario y se caiga
 
+        //Espera antes de terminar el juego
         yield return new WaitForSeconds(1f);
         this.playerController.FinJuego();
        // collision.gameObject.GetComponent<PlayerController>().Perder();
-
-        //coge el game object con el que chocamos y obtiene el script de ese objeto
-        //y ejecuta el método que tiene dentro
     }
+
 
 
     /* private void OnCollisionEnter2D(Collision2D collision)

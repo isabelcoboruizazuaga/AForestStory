@@ -1,11 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpikeController : MonoBehaviour
+public class SpikeController : EnemigoController 
 {
-    private PlayerController playerController;
-    private GameObject player;
-
     public bool isDeadly = true;
     // Start is called before the first frame update
     void Start()
@@ -23,8 +20,8 @@ public class SpikeController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player = collision.gameObject;
-            playerController = player.GetComponent<PlayerController>();            
+            this.player = collision.gameObject;
+            this.playerController = player.GetComponent<PlayerController>();            
 
             //Si el player es vulnerable causa daño como un enemigo normal sin transportar
             if (playerController.vulnerable)
@@ -49,28 +46,5 @@ public class SpikeController : MonoBehaviour
             }            
         }
     }
-    IEnumerator QuitaVida(Collision2D collision)
-    {
-        player.GetComponent<SpriteRenderer>().color = Color.red;
 
-        yield return new WaitForSeconds(3f);
-        this.playerController.vulnerable = true;
-        player.GetComponent<SpriteRenderer>().color = Color.white; //blanco lo deja con el color normal
-    }
-
-    IEnumerator FinJuego(Collision2D collision)
-    {
-        Camera.main.transform.parent = null; //dejamos a la cámara huérfana
-        player.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90)); //se desmaya el player
-        //collision.gameObject.GetComponent<PlayerController>().muerto = true;
-
-        player.GetComponent<SpriteRenderer>().color = Color.red;
-
-        yield return new WaitForSeconds(1f);
-        this.playerController.FinJuego();
-        // collision.gameObject.GetComponent<PlayerController>().Perder();
-
-        //coge el game object con el que chocamos y obtiene el script de ese objeto
-        //y ejecuta el método que tiene dentro
-    }
 }

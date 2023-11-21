@@ -12460,7 +12460,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14215,8 +14215,8 @@ Transform:
   m_GameObject: {fileID: 817296696}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 130.1939, y: -6.9, z: 0}
-  m_LocalScale: {x: 118.18222, y: 20.973675, z: 4.13}
+  m_LocalPosition: {x: 130.1939, y: -5.8, z: 0}
+  m_LocalScale: {x: 161.02327, y: 28.576632, z: 5.627125}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 961628111}
@@ -14419,13 +14419,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0135e617450cb674eacc06d1779a2fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 0
-  fuerzaSalto: 0
   fisica: {fileID: 0}
   sprite: {fileID: 0}
+  velocidad: 0
+  fuerzaSalto: 0
   estrellas: 0
   vidas: 0
   vulnerable: 0
+  muerto: 0
 --- !u!50 &988253131
 Rigidbody2D:
   serializedVersion: 4
@@ -14549,7 +14550,7 @@ Transform:
   m_GameObject: {fileID: 988253129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 122.7, y: -1.4, z: 0}
+  m_LocalPosition: {x: -12.2, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
