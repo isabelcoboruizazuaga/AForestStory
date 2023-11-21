@@ -129,7 +129,7 @@ public class EnemigoController : MonoBehaviour
         Camera.main.transform.parent = null; //dejamos a la cámara huérfana
 
         //Seteamos la muerte
-        collision.gameObject.GetComponent<PlayerController>().muerto = true;
+        playerController.anim.SetBool("dead", true);
         player.GetComponent<SpriteRenderer>().color = Color.red;
         player.GetComponent<Collider2D>().enabled = false; //Para que atraviese el escenario y se caiga
 

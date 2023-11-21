@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D fisica;
     public SpriteRenderer sprite;
-    private Animator anim;
+    public Animator anim;
 
     //Movimiento
     public int velocidad;
@@ -22,21 +22,19 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
+        fisica = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+
         //Movimiento
         velocidad = 8;
         fuerzaSalto = 8;
-
-        fisica = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
 
         //Vidas
         vidas = 3;
         estrellas = 0;
         vulnerable = true;
         muerto = false;
-
-        //Animaciones
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,7 +46,6 @@ public class PlayerController : MonoBehaviour
         //Control de animación
         anim.SetFloat("velocidadX", Mathf.Abs(fisica.velocity.x));
         anim.SetFloat("velocidadY", fisica.velocity.y);
-        anim.SetBool("dead", muerto); //TO DO: CAMBIAR ESTO A UN MÉTODO PARA QUE NO SE ACTUALICE TODO EL RATO
 
         //Mecánica de salto
         Salto();
