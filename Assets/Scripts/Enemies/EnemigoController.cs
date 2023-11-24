@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-using Unity.VisualScripting;
+using System.Collections;
+using UnityEngine;
 
 
 public class EnemigoController : MonoBehaviour
@@ -19,7 +17,7 @@ public class EnemigoController : MonoBehaviour
     protected Rigidbody2D rb;
     protected SpriteRenderer sprite;
     public bool flip = true; //Marca si hay giro o no basándose en la posición inicial del sprite en unity
-    public bool staticFlip=false;
+    public bool staticFlip = false;
 
     public int finX, finY;
 
@@ -85,15 +83,19 @@ public class EnemigoController : MonoBehaviour
         }
     }
 
+    public void DestruyeObjeto()
+    {
+        Destroy(enemigo);
+    }
 
-   
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable)
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable )
         {
             player = collision.gameObject;
-            this.playerController =player.GetComponent<PlayerController>();
+            this.playerController = player.GetComponent<PlayerController>();
 
             this.playerController.vulnerable = false;
 
@@ -115,9 +117,11 @@ public class EnemigoController : MonoBehaviour
 
         }
     }
+
+
     protected IEnumerator QuitaVida(Collision2D collision)
     {
-       player.GetComponent<SpriteRenderer>().color = Color.red;
+        player.GetComponent<SpriteRenderer>().color = Color.red;
 
         yield return new WaitForSeconds(3f);
         this.playerController.vulnerable = true;
@@ -136,7 +140,7 @@ public class EnemigoController : MonoBehaviour
         //Espera antes de terminar el juego
         yield return new WaitForSeconds(1f);
         this.playerController.FinJuego();
-       // collision.gameObject.GetComponent<PlayerController>().Perder();
+        // collision.gameObject.GetComponent<PlayerController>().Perder();
     }
 
 
