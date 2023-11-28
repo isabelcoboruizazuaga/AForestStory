@@ -115,6 +115,10 @@ public class EnemigoController : MonoBehaviour
 
             //hud.SetVidasTxt(collision.gameObject.GetComponent<PlayerController>().vidas);
 
+            //Para cambiar las vidas en el hud
+            playerController.setVidas();
+
+
         }
     }
 
@@ -142,34 +146,4 @@ public class EnemigoController : MonoBehaviour
         this.playerController.FinJuego();
         // collision.gameObject.GetComponent<PlayerController>().Perder();
     }
-
-
-
-    /* private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable)
-        {
-            collision.gameObject.GetComponent<PlayerController>().SetVulnerable(false);
-
-            //vidas-- <=1 -> prrimero compara y luego resta (por ejemplo 2<1, vidas=1)
-            //si es --vidas seria al reves, primero resta y despues compara
-            if (collision.gameObject.GetComponent<PlayerController>().vidas-- <= 1)
-            {
-               // sonido.Play();
-                //StartCoroutine(FinJuego(collision));
-
-
-}
-            else
-{
-    Debug.Log("choque");
-    StartCoroutine(QuitaVida(collision));
-    //Invoke("funcion", 2); llama a la funcion "funcion" en 2 segundos, no admite parámetros, es de unity
-}
-
-            //hud.SetVidasTxt(collision.gameObject.GetComponent<PlayerController>().vidas);
-
-        }
-    }
-*/
 }

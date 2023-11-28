@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     public bool vulnerable;
     public bool muerto;
 
+    //HUD
+    public Canvas canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,5 +112,8 @@ public class PlayerController : MonoBehaviour
         //SceneManager.LoadScene("Menu");
     }
 
-
+    public void setVidas()
+    {
+        canvas.GetComponent<UiController>().CambioVida(vidas);
+    }
 }

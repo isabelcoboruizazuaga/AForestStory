@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpsController : MonoBehaviour
 {
     private Animator anim;
 
-    public bool estrella=false;
-    public int vidasExtra=0;
+    public bool estrella = false;
+    public int vidasExtra = 0;
     private bool entrado;
 
     // Start is called before the first frame update
@@ -27,12 +25,21 @@ public class PowerUpsController : MonoBehaviour
 
             entrado = true; //así se evita que al pasar dos veces antes de que desaparezca se dupliquen los puntos
 
-            PlayerController jugador= collision.gameObject.GetComponent<PlayerController>();
+            PlayerController jugador = collision.gameObject.GetComponent<PlayerController>();
 
             if (estrella)
+            {
                 jugador.estrellas++; //Si es una estrella se suma a las conseguidas
+            }
+            else
+            {
+                if (jugador.vidas < 3)
+                {
+                    jugador.vidas += vidasExtra;
+                    jugador.setVidas();
+                }
+            }
 
-            jugador.vidas += vidasExtra;
 
             Destroy(gameObject, 1); //destruye el objeto en 1 segundo
         }
