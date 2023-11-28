@@ -1,20 +1,11 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpikeController : EnemigoController 
 {
     public bool isDeadly = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public GameObject spawnCartel;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -40,7 +31,7 @@ public class SpikeController : EnemigoController
                     if (isDeadly)
                     {
                         //Resetea la posicion al check point, aún no hay asi que me lo invento
-                        player.transform.position = new Vector3(122.699997f, -1.39999998f, 0f);
+                        player.transform.position = spawnCartel.transform.position;
                     }
                 }
             }            
