@@ -30,6 +30,7 @@ public class PowerUpsController : MonoBehaviour
             if (estrella)
             {
                 jugador.estrellas++; //Si es una estrella se suma a las conseguidas
+                jugador.SetEstrellas();
             }
             else
             {
@@ -39,8 +40,6 @@ public class PowerUpsController : MonoBehaviour
                     jugador.setVidas();
                 }
             }
-
-
             Destroy(gameObject, 1); //destruye el objeto en 1 segundo
         }
     }

@@ -89,15 +89,17 @@ public class EnemigoController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
 
+        Debug.Log("2 collision"); 
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable )
         {
             player = collision.gameObject;
             this.playerController = player.GetComponent<PlayerController>();
 
             this.playerController.vulnerable = false;
+
 
             //vidas-- <=1 -> prrimero compara y luego resta (por ejemplo 2<1, vidas=1)
             //si es --vidas seria al reves, primero resta y despues compara
@@ -122,7 +124,9 @@ public class EnemigoController : MonoBehaviour
         }
     }
 
-
+    /**
+     * Se llama tras recibir daño, cambia el color a rojo y tras un tiempo vuelve al player vulnerable de nuevo
+     */
     protected IEnumerator QuitaVida(Collision2D collision)
     {
         player.GetComponent<SpriteRenderer>().color = Color.red;

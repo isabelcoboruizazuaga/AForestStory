@@ -114,6 +114,10 @@ public class PlayerController : MonoBehaviour
 
     public void setVidas()
     {
-        canvas.GetComponent<UiController>().CambioVida(vidas);
+        canvas.GetComponent<HUDController>().CambioVida(vidas);
+    }
+    public void SetEstrellas()
+    {
+        canvas.GetComponent<HUDController>().SetEstrellas(estrellas);
     }
 }
