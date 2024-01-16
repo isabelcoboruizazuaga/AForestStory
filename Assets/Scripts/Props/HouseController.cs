@@ -1,9 +1,13 @@
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class HouseController : MonoBehaviour
 {
     [SerializeField] private bool triggerActive = false;
+    public Image textoNivel;
 
     private void Update()
     {
@@ -16,7 +20,7 @@ public class HouseController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().estrellas >= 3)
         {
-
+            textoNivel.gameObject.SetActive(true);
             triggerActive = true;
 
         }
