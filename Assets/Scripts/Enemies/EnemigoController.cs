@@ -91,15 +91,14 @@ public class EnemigoController : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-
-        Debug.Log("2 collision"); 
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().vulnerable )
         {
             player = collision.gameObject;
             this.playerController = player.GetComponent<PlayerController>();
 
-            this.playerController.vulnerable = false;
+            playerController.sonidoDolor.Play();
 
+            this.playerController.vulnerable = false;
 
             //vidas-- <=1 -> prrimero compara y luego resta (por ejemplo 2<1, vidas=1)
             //si es --vidas seria al reves, primero resta y despues compara
@@ -107,19 +106,14 @@ public class EnemigoController : MonoBehaviour
             {
                 //sonido.Play();
                 StartCoroutine(FinJuego(collision));
-
-
             }
             else
             {
                 StartCoroutine(QuitaVida(collision));
             }
 
-            //hud.SetVidasTxt(collision.gameObject.GetComponent<PlayerController>().vidas);
-
             //Para cambiar las vidas en el hud
             playerController.setVidas();
-
 
         }
     }

@@ -8,11 +8,13 @@ public class HouseController : MonoBehaviour
 {
     [SerializeField] private bool triggerActive = false;
     public Image textoNivel;
+    public AudioSource sonidoVictoria;
 
     private void Update()
     {
         if (triggerActive && Input.GetKeyDown(KeyCode.E))
         {
+            sonidoVictoria.Play();
             Debug.Log("SiguienteNivel!");
         }
     }

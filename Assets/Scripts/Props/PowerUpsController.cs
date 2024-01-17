@@ -8,6 +8,10 @@ public class PowerUpsController : MonoBehaviour
     public int vidasExtra = 0;
     private bool entrado;
 
+
+    public AudioSource sonidoEstrella;
+    public AudioSource sonidoZanahoria;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +33,13 @@ public class PowerUpsController : MonoBehaviour
 
             if (estrella)
             {
+                sonidoEstrella.Play();
                 jugador.estrellas++; //Si es una estrella se suma a las conseguidas
                 jugador.SetEstrellas();
             }
             else
             {
+                sonidoZanahoria.Play();
                 if (jugador.vidas < 3)
                 {
                     jugador.vidas += vidasExtra;

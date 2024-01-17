@@ -12,6 +12,8 @@ public class SpikeController : EnemigoController
             player = collision.gameObject;
             this.playerController = player.GetComponent<PlayerController>();
 
+            playerController.sonidoDolor.Play();
+
             if (isDeadly)
             {
                 playerController.vulnerable = true;
