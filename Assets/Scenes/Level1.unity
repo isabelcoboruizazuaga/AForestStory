@@ -8244,6 +8244,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 742703883}
     - target: {fileID: 5020002939754261435, guid: 9a0972f79cec5334a8d1da1cba2597aa, type: 3}
+      propertyPath: siguienteNivel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020002939754261435, guid: 9a0972f79cec5334a8d1da1cba2597aa, type: 3}
       propertyPath: sonidoVictoria
       value: 
       objectReference: {fileID: 1311488417}
@@ -85594,6 +85598,10 @@ PrefabInstance:
       propertyPath: textoNivel
       value: 
       objectReference: {fileID: 699104504}
+    - target: {fileID: 5020002939754261435, guid: 9a0972f79cec5334a8d1da1cba2597aa, type: 3}
+      propertyPath: siguienteNivel
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5020002939754261435, guid: 9a0972f79cec5334a8d1da1cba2597aa, type: 3}
       propertyPath: sonidoVictoria
       value: 

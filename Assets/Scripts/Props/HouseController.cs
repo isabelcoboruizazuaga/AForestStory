@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
 
@@ -9,16 +12,24 @@ public class HouseController : MonoBehaviour
     [SerializeField] private bool triggerActive = false;
     public Image textoNivel;
     public AudioSource sonidoVictoria;
+    public int siguienteNivel=1;
 
     private void Update()
     {
         if (triggerActive && Input.GetKeyDown(KeyCode.E))
         {
-            sonidoVictoria.Play();
-            Debug.Log("SiguienteNivel!");
+            StartCoroutine(pasarNivel());
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator pasarNivel()
+    {
+        sonidoVictoria.Play();
+
+        yield return new WaitForSeconds(sonidoVictoria.clip.length);
+
+        SceneManager.LoadScene("Level" + siguienteNivel.ToString());
+    }
+        private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerController>().estrellas >= 3)
         {
