@@ -41,7 +41,7 @@ public class EnemigoController : MonoBehaviour
         MoverEnemigo();
     }
 
-    private void MoverEnemigo()
+    protected virtual void MoverEnemigo()
     {
         Vector3 posicionDestino;
 

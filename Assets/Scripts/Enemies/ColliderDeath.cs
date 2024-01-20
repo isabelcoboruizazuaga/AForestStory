@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ColliderDeath : MonoBehaviour
@@ -9,22 +6,27 @@ public class ColliderDeath : MonoBehaviour
     protected PlayerController playerController;
     protected GameObject player;
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Obtencion del player y su controller
-        player = collision.gameObject;
-        this.playerController = player.GetComponent<PlayerController>();
+        if (collision.gameObject.CompareTag("Player"))
+        {
 
-        //Se reproduce el sonido de muerte
-        this.playerController.sonidoMuerteEnemigo.Play();
+            //Obtencion del player y su controller
+            player = collision.gameObject;
+            this.playerController = player.GetComponent<PlayerController>();
 
-        //Se destruye el enemigo
-        this.gameObject.GetComponentInParent<EnemigoController>().DestruyeObjeto();
-        Destroy(this.gameObject);
+            //Se reproduce el sonido de muerte
+            this.playerController.sonidoMuerteEnemigo.Play();
 
-        //Se setea el player como vulnerable por si estaba desactivado
-        this.playerController.vulnerable = true;
-        player.GetComponent<SpriteRenderer>().color = Color.white;
+            //Se destruye el enemigo
+            this.gameObject.GetComponentInParent<EnemigoController>().DestruyeObjeto();
+            Destroy(this.gameObject);
+
+            //Se setea el player como vulnerable por si estaba desactivado
+            this.playerController.vulnerable = true;
+            player.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
-    
+
 }

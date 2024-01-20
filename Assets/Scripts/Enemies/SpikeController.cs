@@ -44,6 +44,11 @@ public class SpikeController : EnemigoController
         }       
     }
 
+    protected override void MoverEnemigo()
+    {
+        //no hace nada porque los spikes no se mueven
+    }
+
     private void MecanicaDanio(Collision2D collision)
     {
         this.playerController.vulnerable = false;
