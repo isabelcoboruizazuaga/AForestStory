@@ -27,7 +27,14 @@ public class HouseController : MonoBehaviour
 
         yield return new WaitForSeconds(sonidoVictoria.clip.length);
 
-        SceneManager.LoadScene("Level" + siguienteNivel.ToString());
+        if (siguienteNivel != -1)
+        {
+            SceneManager.LoadScene("Level" + siguienteNivel.ToString());
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
         private void OnTriggerEnter2D(Collider2D collision)
     {
