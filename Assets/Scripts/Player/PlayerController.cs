@@ -58,6 +58,25 @@ public class PlayerController : MonoBehaviour
         Salto();
         //Giro de dibujo del personaje
         Flip();
+
+        //Teclas de nivel
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SceneManager.LoadScene("Level1");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SceneManager.LoadScene("Level3");
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
     }
 
     private void FixedUpdate()
