@@ -104,8 +104,7 @@ public class EnemigoController : MonoBehaviour
             //si es --vidas seria al reves, primero resta y despues compara
             if (this.playerController.vidas-- <= 1)
             {
-                //sonido.Play();
-                StartCoroutine(FinJuego(collision));
+                 StartCoroutine(FinJuego(collision));
             }
             else
             {
@@ -132,16 +131,27 @@ public class EnemigoController : MonoBehaviour
 
     protected IEnumerator FinJuego(Collision2D collision)
     {
-        Camera.main.transform.parent = null; //dejamos a la cámara huérfana
-
+        this.playerController.FinJuego();
+        
+       
         //Seteamos la muerte
         playerController.anim.SetBool("dead", true);
         player.GetComponent<SpriteRenderer>().color = Color.red;
-        player.GetComponent<Collider2D>().enabled = false; //Para que atraviese el escenario y se caiga
+
+        //Espera antes de terminar el juego
+        yield return new WaitForSeconds(1f);
+
+        player.GetComponent<SpriteRenderer>().color = Color.white;
+        this.playerController.FinJuego();
+
+        /*
+         *  Camera.main.transform.parent = null; //dejamos a la cámara huérfana
+
+          player.GetComponent<Collider2D>().enabled = false; //Para que atraviese el escenario y se caiga
 
         //Espera antes de terminar el juego
         yield return new WaitForSeconds(1f);
         this.playerController.FinJuego();
-        // collision.gameObject.GetComponent<PlayerController>().Perder();
+        // collision.gameObject.GetComponent<PlayerController>().Perder();*/
     }
 }

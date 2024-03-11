@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     //HUD
     public Canvas canvas;
+    public GameObject panelMuerte;
 
     //Sonido
     public AudioSource sonidoSalto;
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         fisica = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+
+        panelMuerte.SetActive(false);
 
         //Movimiento
         velocidad = 8;
@@ -134,14 +137,18 @@ public class PlayerController : MonoBehaviour
 
     public void FinJuego()
     {
+        panelMuerte.SetActive(true);
+    }
+    public void Morir()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        panelMuerte.SetActive(false);
         //El scene manager carga la escena activa, para esto necesita el número de índice de la escena
-
-        //SceneManager.LoadScene("Menu");
     }
 
     public void setVidas()
     {
+        panelMuerte.SetActive(false);
         canvas.GetComponent<HUDController>().CambioVida(vidas);
     }
     public void SetEstrellas()
