@@ -17,7 +17,10 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
     //utility wrappers for debuglog
     public delegate void DebugEvent(string msg);
     public static event DebugEvent OnDebugLog;
-
+    private void Start()
+    {
+        Initialize();
+    }
     public void Initialize()
     {
         if (!is_init)
@@ -35,7 +38,6 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
         }
         else{
             Debug.Log("Sistema inicializado correctamente");
-            LoadNonRewardedAd();
         }
     }
 
@@ -43,7 +45,6 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
     {
         if (is_init) {
             Advertisement.Load(VIDEO_PLACEMENT, this);
-            ShowNonRewardedAd();
         } else {
             Debug.Log("Inicializa antes de cargar");
         }
@@ -64,6 +65,8 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
     {
         DebugLog("Init Success");
         is_init = true;
+
+        LoadNonRewardedAd();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
@@ -76,6 +79,8 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
     {
         DebugLog($"Load Success: {placementId}");
         is_load = true;
+
+        ShowNonRewardedAd();
     }
 
     public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
@@ -101,10 +106,7 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
-        if ($"{showCompletionState}" == "SKIPPED"){
-        }
-        if ($"{showCompletionState}" == "COMPLETED"){
-        }
+       
         is_load = false;
         DebugLog($"OnUnityAdsShowComplete: [{showCompletionState}]: {placementId}");
     }
