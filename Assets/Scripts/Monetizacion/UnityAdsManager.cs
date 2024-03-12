@@ -27,6 +27,7 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
         {
             if (Advertisement.isSupported)
             {
+
                 DebugLog(Application.platform + " supported by Advertisement");
             }
             else
